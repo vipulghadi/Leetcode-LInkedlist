@@ -1,0 +1,55 @@
+
+--------------------------------using hashing to store the address-------------------------------------------------------------
+ unordered_set<Node*>s;
+    while(head1!=NULL)
+    {
+        if(s.find(head1)!=s.end())continue;
+        else s.insert(head1);
+        head1=head1->next;
+        
+    }
+    while(head2!=NULL)
+    {
+        if(s.find(head2)!=s.end())return head2->data;
+        head2=head2->next;
+    }
+    return -1;
+
+
+-----------------------------------using counting approach and equalize the length-----------------------------------------------------------------
+int len(Node*temp)
+{
+    int count=0;
+    while(temp){
+        count++;
+        temp=temp->next;
+    }
+    return count;
+}
+Node* newPoint(Node * temp,int diff)
+{
+    while(diff){
+    temp=temp->next;
+        diff--;
+    }
+    return temp;
+    
+}
+int intersectPoint(Node* head1, Node* head2)
+{
+ int h1Len=len(head1);
+ int h2Len=len(head2);
+ Node*newHead1=head1,*newHead2=head2;
+  if(h1Len>h2Len) newHead1= newPoint(head1,h1Len-h2Len);
+  if(h1Len<h2Len) newHead2=newPoint(head2,h2Len-h1Len);
+  
+  while(newHead1!=NULL)
+  {
+      if(newHead1==newHead2)return newHead1->data;
+      newHead1=newHead1->next;
+      newHead2=newHead2->next;
+  }
+  return -1;
+
+--------------------------------------------------------------------------------------------------------------------
+  
