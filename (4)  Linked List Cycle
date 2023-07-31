@@ -1,0 +1,22 @@
+--------------------------------using set ------------------------------------------------
+unordered_set<ListNode*>s;
+        ListNode*temp=head;
+        while(temp!=NULL)
+        {
+            if(s.find(temp)!=s.end())return true;
+            else s.insert(temp);
+            temp=temp->next;
+        }
+        return 0;
+---------------------fast pointer-slow pointer------------------------------------------
+ ListNode*slow=head;
+      ListNode*fast=head;
+  
+      while(fast!=NULL && fast->next!=NULL)
+      {
+          slow=slow->next;
+          fast=fast->next->next;
+          if(fast==slow)return true;
+
+      }
+      return false;
