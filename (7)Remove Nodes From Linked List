@@ -1,0 +1,29 @@
+-------------------------iterative solution-------------------------------------------------------------------------
+    ListNode* removeNodes(ListNode* head) {
+       ListNode* newHead=reverse(head);
+       int maxi=newHead->val;
+       ListNode*itr=newHead;
+
+       while(itr&& itr->next)
+       {
+           if(itr->next->val<maxi)
+           {
+             ListNode*toDelete=itr->next;
+             itr->next=toDelete->next;
+             delete toDelete;
+           }
+           else{
+               maxi=max(maxi,itr->next->val);
+               itr=itr->next;
+           }
+
+       }
+       return(reverse(newHead));
+    }
+-------------------------------------recursive solution----------------------------------------------------
+
+ if(head->next==NULL)return head;
+       head->next=removeNodes(head->next);
+       return head=head->next->val>head->val?head->next:head;
+
+-----------------------------------------------------------------------------------------------------------------------
