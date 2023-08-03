@@ -1,0 +1,82 @@
+
+ Node* reverse(Node*head)
+    {
+        Node*pre=NULL,*cur=head;
+        while(cur)
+        {
+            Node*next_=cur->next;
+            cur->next=pre;
+            pre=cur;
+            cur=next_;
+        }
+        return pre;
+        
+    }
+    void insertNode(Node*&head,Node*&tail,int digit)
+    {
+        Node*temp=new Node(digit);
+        if(head==NULL && tail==NULL)
+        {
+            head=temp;
+            tail=temp;
+        }
+        else
+        {
+            tail->next=temp;
+            tail=tail->next;
+        }
+    }
+    
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        first=reverse(first);
+        second=reverse(second);
+        int carry=0;
+        Node*head=NULL,*tail=NULL;
+       
+        while(first && second)
+        {   
+           int sum=first->data+second->data+carry;
+           int digit=sum%10;
+           carry=sum/10;
+         
+           insertNode(head,tail,digit);
+           first=first->next;
+           second=second->next;
+        }
+    
+        if(first!=NULL)
+        {
+          while(first)
+          {
+           int sum=first->data+carry;
+           int digit=sum%10;
+           carry=sum/10;
+         
+           insertNode(head,tail,digit);
+           first=first->next;
+          }
+        }
+        
+        if(second!=NULL)
+        {
+           while(second)
+          {
+           int sum=second->data+carry;
+           int digit=sum%10;
+           carry=sum/10;
+           insertNode(head,tail,digit);
+           second=second->next;
+          
+          }
+        }
+       
+        head= reverse(head);
+         if(carry!=0){
+            Node*addCarry=new Node(carry);
+            addCarry->next=head;
+            head=addCarry;
+        }
+        return head;
+    }
+-----------------------------------------------------------------------------------------------------------------------
