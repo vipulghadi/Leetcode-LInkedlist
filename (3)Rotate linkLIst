@@ -1,0 +1,14 @@
+--------------------using 2 loops --------------------------
+Node*tail=head;
+        Node*temp=head;
+    
+        while(tail->next) tail=tail->next;
+        while(k--){
+            Node*newHead=temp->next;
+            tail->next=temp;
+            temp->next=NULL;
+            tail=tail->next;
+            temp=newHead;
+        }
+        return temp;
+----------------------------------------------------------------------------------------
