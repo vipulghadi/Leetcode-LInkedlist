@@ -1,0 +1,45 @@
+-------------------------------------------------------------------------------------------------------
+void insertElement(Node*&head,Node*&tail,int num)
+{
+     Node*temp=new Node(num);
+    if(head==NULL&&tail==NULL)
+    {
+       
+        head=temp;
+        tail=temp;
+    }
+    else{
+        tail->bottom=temp;
+        tail=tail->bottom;
+    }
+}
+
+Node*merge(Node*root,Node*flat)
+{
+    Node*head=NULL;
+    Node*tail=NULL;
+    while(root && flat)
+    {
+        if(root->data<flat->data)
+        {
+            insertElement(head,tail,root->data);
+            root=root->bottom;
+        }
+        else
+        {
+            insertElement(head,tail,flat->data);
+            flat=flat->bottom;
+        }
+    }
+    if(flat)tail->bottom=flat;
+    if(root)tail->bottom=root;
+    return head;
+    
+}
+Node *flatten(Node *root)
+{
+   if(root->next==NULL|| root==NULL)return root;
+   return merge(root,flatten(root->next));
+}
+
+---------------------------------------------------------------------------------------------------------------
