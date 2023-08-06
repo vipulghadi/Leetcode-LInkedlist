@@ -1,0 +1,25 @@
+---------------------------------------naive approach (taking extra list to store negative nodes)------------------------------------------------------------------------
+Node* divide(int N, Node *head){
+      if(head==NULL ||head->next==NULL)return head;  
+      Node*dummy=new Node(-1);
+      dummy->next=head;
+      Node*temp=dummy;
+      Node*odd=new Node(-1);
+      Node*itr=odd;
+      
+      while(temp->next)
+      {
+          if(temp->next->data%2!=0)
+          {
+              itr->next=temp->next;
+              itr=itr->next;
+              temp->next=temp->next->next;
+          }
+          else temp=temp->next;
+      }
+      itr->next=NULL;
+      if(dummy->next==NULL)return odd->next;
+      if(odd->next==NULL)return dummy->next;
+      temp->next=odd->next;
+      return dummy->next;
+      -------------------------------------------------------------------------------------------------------------------------
