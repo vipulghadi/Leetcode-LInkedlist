@@ -1,0 +1,27 @@
+------------------------------------------Approach No 1-------------------------------------------------------------------------
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+      unordered_map<Node*,Node*>mp;
+      Node* dummy=new Node(0);
+      Node* temp=head;
+      Node*mover=dummy;
+      while(temp){
+          Node* newNode=new Node(temp->val);
+          mp[temp]=newNode;//storing
+          mover->next=newNode;
+          mover=newNode;
+          temp=temp->next;
+      }  
+      temp=head;
+      mover=dummy->next;
+
+      while(temp){
+          mover->random=mp[temp->random];
+          mover=mover->next;
+          temp=temp->next;
+      }
+      return dummy->next;
+    }
+};
+--------------------------------------------------------------------------------------------------
